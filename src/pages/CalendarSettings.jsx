@@ -23,12 +23,16 @@ const CalendarSettings = () => {
 
         // Show appropriate messages if there are configuration issues
         if (!response.data.envConfigured) {
-          warning("Google Calendar API credentials are not configured on the server. Please ask your administrator to set up the required credentials.");
+          warning(
+            "Google Calendar API credentials are not configured on the server. Please ask your administrator to set up the required credentials."
+          );
         } else if (
           response.data.tokenStatus === "invalid" &&
           response.data.connected
         ) {
-          warning("Your Google Calendar access has expired. Please reconnect your account.");
+          warning(
+            "Your Google Calendar access has expired. Please reconnect your account."
+          );
         }
       } catch (error) {
         console.error("Error fetching calendar status:", error);
@@ -108,7 +112,9 @@ const CalendarSettings = () => {
     try {
       setLoading(true);
       const response = await API.post("/calendar/sync/all");
-      success(`Successfully synced ${response.data.syncResults.length} tasks to Google Calendar`);
+      success(
+        `Successfully synced ${response.data.syncResults.length} tasks to Google Calendar`
+      );
     } catch (err) {
       console.error("Error syncing tasks to Google Calendar:", err);
       error("Failed to sync tasks to Google Calendar");
@@ -311,7 +317,7 @@ const CalendarSettings = () => {
           </>
         )}
       </div>
-      
+
       {/* Notification Settings */}
       <NotificationSettings />
     </div>

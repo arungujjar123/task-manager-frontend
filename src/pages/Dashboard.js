@@ -94,7 +94,7 @@ export default function Dashboard() {
 
         return updatedTasks;
       });
-      
+
       success("Task marked as complete!");
     } catch (err) {
       console.error(err);

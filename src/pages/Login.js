@@ -39,7 +39,7 @@ export default function Login() {
       }
     } catch (err) {
       console.error("Login error:", err);
-      const errorMessage = 
+      const errorMessage =
         err.response?.data?.message ||
         err.message ||
         "Login failed. Please check your credentials and try again.";

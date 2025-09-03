@@ -113,7 +113,7 @@ export default function EditTask() {
 
       // Success notification
       success("Task updated successfully!");
-      
+
       // Navigate back to dashboard
       navigate("/dashboard");
     } catch (err) {

@@ -67,7 +67,12 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
       const activeContainer = findContainer(active.id);
       const overContainer = findContainer(over.id);
 
-      console.log("Active container:", activeContainer, "Over container:", overContainer);
+      console.log(
+        "Active container:",
+        activeContainer,
+        "Over container:",
+        overContainer
+      );
 
       if (activeContainer && overContainer) {
         // Same container - just reorder
@@ -107,7 +112,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
           const sourceIndex = sourceItems.findIndex(
             (item) => item._id === active.id
           );
-          
+
           // Check if we're dropping on a specific task or just into the column
           const destinationIndex = destinationItems.findIndex(
             (item) => item._id === over.id
@@ -117,7 +122,14 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
             // Remove from source
             const [movedItem] = sourceItems.splice(sourceIndex, 1);
 
-            console.log("Moving task:", movedItem.title, "from", activeContainer, "to", overContainer);
+            console.log(
+              "Moving task:",
+              movedItem.title,
+              "from",
+              activeContainer,
+              "to",
+              overContainer
+            );
 
             // Change status to match the target container
             movedItem.status = overContainer;
@@ -183,7 +195,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
     if (columns.hasOwnProperty(id)) {
       return id;
     }
-    
+
     // Then check if id is a task id
     for (const [key, items] of Object.entries(columns)) {
       if (items.some((item) => item._id === id)) {
