@@ -26,7 +26,7 @@ ChartJS.register(
   Legend,
   ArcElement,
   PointElement,
-  LineElement
+  LineElement,
 );
 
 export default function Analytics() {
@@ -146,7 +146,7 @@ export default function Analytics() {
         (task) =>
           new Date(task.createdAt) >= oneWeekAgo ||
           (task.status === "completed" &&
-            new Date(task.updatedAt) >= oneWeekAgo)
+            new Date(task.updatedAt) >= oneWeekAgo),
       );
     } else if (timeRange === "month") {
       const oneMonthAgo = new Date(now);
@@ -155,7 +155,7 @@ export default function Analytics() {
         (task) =>
           new Date(task.createdAt) >= oneMonthAgo ||
           (task.status === "completed" &&
-            new Date(task.updatedAt) >= oneMonthAgo)
+            new Date(task.updatedAt) >= oneMonthAgo),
       );
     } else if (timeRange === "year") {
       const oneYearAgo = new Date(now);
@@ -164,19 +164,19 @@ export default function Analytics() {
         (task) =>
           new Date(task.createdAt) >= oneYearAgo ||
           (task.status === "completed" &&
-            new Date(task.updatedAt) >= oneYearAgo)
+            new Date(task.updatedAt) >= oneYearAgo),
       );
     }
 
     // Process task status data
     const pendingCount = filteredTasks.filter(
-      (task) => task.status === "pending"
+      (task) => task.status === "pending",
     ).length;
     const inProgressCount = filteredTasks.filter(
-      (task) => task.status === "in-progress"
+      (task) => task.status === "in-progress",
     ).length;
     const completedCount = filteredTasks.filter(
-      (task) => task.status === "completed"
+      (task) => task.status === "completed",
     ).length;
 
     setTaskStatusData({
@@ -191,13 +191,13 @@ export default function Analytics() {
 
     // Process task priority data
     const lowPriorityCount = filteredTasks.filter(
-      (task) => task.priority === "Low"
+      (task) => task.priority === "Low",
     ).length;
     const mediumPriorityCount = filteredTasks.filter(
-      (task) => task.priority === "Medium"
+      (task) => task.priority === "Medium",
     ).length;
     const highPriorityCount = filteredTasks.filter(
-      (task) => task.priority === "High"
+      (task) => task.priority === "High",
     ).length;
 
     setTaskPriorityData({
@@ -247,11 +247,11 @@ export default function Analytics() {
         const tasksCompletedOnDate = filteredTasks.filter(
           (task) =>
             task.status === "completed" &&
-            format(new Date(task.updatedAt), "yyyy-MM-dd") === dateStr
+            format(new Date(task.updatedAt), "yyyy-MM-dd") === dateStr,
         ).length;
 
         const tasksCreatedOnDate = filteredTasks.filter(
-          (task) => format(new Date(task.createdAt), "yyyy-MM-dd") === dateStr
+          (task) => format(new Date(task.createdAt), "yyyy-MM-dd") === dateStr,
         ).length;
 
         completedData.push(tasksCompletedOnDate);
@@ -267,7 +267,7 @@ export default function Analytics() {
 
         const weekLabel = `${format(startDate, "MMM d")} - ${format(
           endDate,
-          "MMM d"
+          "MMM d",
         )}`;
         dateLabels.push(weekLabel);
 
@@ -299,11 +299,11 @@ export default function Analytics() {
         const tasksCompletedInMonth = filteredTasks.filter(
           (task) =>
             task.status === "completed" &&
-            format(new Date(task.updatedAt), "yyyy-MM") === monthStr
+            format(new Date(task.updatedAt), "yyyy-MM") === monthStr,
         ).length;
 
         const tasksCreatedInMonth = filteredTasks.filter(
-          (task) => format(new Date(task.createdAt), "yyyy-MM") === monthStr
+          (task) => format(new Date(task.createdAt), "yyyy-MM") === monthStr,
         ).length;
 
         completedData.push(tasksCompletedInMonth);
@@ -327,17 +327,17 @@ export default function Analytics() {
 
     // Calculate average completion time by priority
     const completedTasks = filteredTasks.filter(
-      (task) => task.status === "completed"
+      (task) => task.status === "completed",
     );
 
     const lowPriorityTasks = completedTasks.filter(
-      (task) => task.priority === "Low"
+      (task) => task.priority === "Low",
     );
     const mediumPriorityTasks = completedTasks.filter(
-      (task) => task.priority === "Medium"
+      (task) => task.priority === "Medium",
     );
     const highPriorityTasks = completedTasks.filter(
-      (task) => task.priority === "High"
+      (task) => task.priority === "High",
     );
 
     const calculateAvgCompletionDays = (tasks) => {
@@ -425,14 +425,14 @@ export default function Analytics() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
             Analytics Dashboard
           </h1>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setTimeRange("week")}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
+              className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm font-medium ${
                 timeRange === "week"
                   ? "bg-indigo-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -442,7 +442,7 @@ export default function Analytics() {
             </button>
             <button
               onClick={() => setTimeRange("month")}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
+              className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm font-medium ${
                 timeRange === "month"
                   ? "bg-indigo-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -452,7 +452,7 @@ export default function Analytics() {
             </button>
             <button
               onClick={() => setTimeRange("year")}
-              className={`px-4 py-2 rounded-md text-sm font-medium ${
+              className={`w-full sm:w-auto px-4 py-2 rounded-md text-sm font-medium ${
                 timeRange === "year"
                   ? "bg-indigo-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -491,7 +491,7 @@ export default function Analytics() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Task Status Chart */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Status
               </h2>
@@ -513,7 +513,7 @@ export default function Analytics() {
             </div>
 
             {/* Task Priority Chart */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Priority
               </h2>
@@ -535,7 +535,7 @@ export default function Analytics() {
             </div>
 
             {/* Task Category Chart */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Categories
               </h2>
@@ -557,7 +557,7 @@ export default function Analytics() {
             </div>
 
             {/* Task Completion Trend */}
-            <div className="bg-white p-6 rounded-lg shadow-md md:col-span-2">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md md:col-span-2">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Completion Trend
               </h2>
@@ -567,7 +567,7 @@ export default function Analytics() {
             </div>
 
             {/* Average Completion Time */}
-            <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Avg. Completion Time (Days)
               </h2>
@@ -589,7 +589,7 @@ export default function Analytics() {
             </div>
 
             {/* Task Statistics Summary */}
-            <div className="bg-white p-6 rounded-lg shadow-md md:col-span-3">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md md:col-span-3">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">
                 Task Statistics
               </h2>

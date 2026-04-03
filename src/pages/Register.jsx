@@ -32,9 +32,9 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md border border-gray-100">
+      <div className="bg-white p-6 sm:p-8 rounded-lg shadow-xl w-full max-w-md border border-gray-100">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             Create Account
           </h2>
           <p className="text-gray-600">Start managing your tasks efficiently</p>

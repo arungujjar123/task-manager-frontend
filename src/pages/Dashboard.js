@@ -77,14 +77,14 @@ export default function Dashboard() {
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       // Update the task list
       setTasks((prev) => {
         // Find and update the completed task
         const updatedTasks = prev.map((task) =>
-          task._id === id ? { ...task, status: "completed" } : task
+          task._id === id ? { ...task, status: "completed" } : task,
         );
 
         // If a new recurring task was created, add it to the list
@@ -199,11 +199,13 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            My Tasks
+          </h1>
           <button
             onClick={() => navigate("/add-task")}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex w-full sm:w-auto justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +224,7 @@ export default function Dashboard() {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
+        <div className="bg-white p-4 sm:p-5 rounded-lg shadow-sm mb-6">
           <div className="mb-4">
             <label
               htmlFor="search"
@@ -330,17 +332,17 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="mt-4 flex justify-between">
+          <div className="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             {/* View Toggle */}
-            <div className="flex items-center space-x-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-medium text-gray-700">
                 View Mode:
               </span>
-              <div className="flex rounded-md shadow-sm">
+              <div className="flex w-full sm:w-auto rounded-md shadow-sm">
                 <button
                   type="button"
                   onClick={() => setViewMode("list")}
-                  className={`relative inline-flex items-center px-3 py-2 rounded-l-md border ${
+                  className={`relative inline-flex flex-1 sm:flex-none justify-center items-center px-3 py-2 rounded-l-md border ${
                     viewMode === "list"
                       ? "bg-indigo-600 text-white border-indigo-600"
                       : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
@@ -365,7 +367,7 @@ export default function Dashboard() {
                 <button
                   type="button"
                   onClick={() => setViewMode("kanban")}
-                  className={`relative inline-flex items-center px-3 py-2 rounded-r-md border ${
+                  className={`relative inline-flex flex-1 sm:flex-none justify-center items-center px-3 py-2 rounded-r-md border ${
                     viewMode === "kanban"
                       ? "bg-indigo-600 text-white border-indigo-600"
                       : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
@@ -398,7 +400,7 @@ export default function Dashboard() {
                 setCategoryFilter("all");
                 setDateFilter("all");
               }}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="w-full md:w-auto px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-transparent rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
               Clear Filters
             </button>
@@ -485,27 +487,27 @@ export default function Dashboard() {
             </div>
 
             {viewMode === "list" ? (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredTasks.map((task) => (
                   <div
                     key={task._id}
                     className={`${getStatusColor(
-                      task.dueDate
+                      task.dueDate,
                     )} overflow-hidden rounded-lg shadow-sm transition transform hover:shadow-md hover:-translate-y-1`}
                   >
                     <div className="px-4 py-5 sm:p-6">
-                      <div className="flex justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                         <h3 className="text-lg font-semibold text-gray-900 truncate">
                           {task.title}
                         </h3>
-                        <div className="flex space-x-2">
+                        <div className="flex flex-wrap gap-2">
                           <span
                             className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                               task.status === "completed"
                                 ? "bg-green-100 text-green-800"
                                 : task.status === "in-progress"
-                                ? "bg-blue-100 text-blue-800"
-                                : "bg-yellow-100 text-yellow-800"
+                                  ? "bg-blue-100 text-blue-800"
+                                  : "bg-yellow-100 text-yellow-800"
                             }`}
                           >
                             {task.status === "in-progress"
@@ -517,8 +519,8 @@ export default function Dashboard() {
                               task.priority === "High"
                                 ? "bg-red-100 text-red-800"
                                 : task.priority === "Medium"
-                                ? "bg-orange-100 text-orange-800"
-                                : "bg-green-100 text-green-800"
+                                  ? "bg-orange-100 text-orange-800"
+                                  : "bg-green-100 text-green-800"
                             }`}
                           >
                             {task.priority}
@@ -533,12 +535,12 @@ export default function Dashboard() {
                             task.category === "Work"
                               ? "bg-blue-50 text-blue-700"
                               : task.category === "Personal"
-                              ? "bg-purple-50 text-purple-700"
-                              : task.category === "Shopping"
-                              ? "bg-pink-50 text-pink-700"
-                              : task.category === "Study"
-                              ? "bg-indigo-50 text-indigo-700"
-                              : "bg-gray-50 text-gray-700"
+                                ? "bg-purple-50 text-purple-700"
+                                : task.category === "Shopping"
+                                  ? "bg-pink-50 text-pink-700"
+                                  : task.category === "Study"
+                                    ? "bg-indigo-50 text-indigo-700"
+                                    : "bg-gray-50 text-gray-700"
                           }`}
                         >
                           {task.category || "Other"}
@@ -585,7 +587,7 @@ export default function Dashboard() {
                                   (task.subtasks.filter((st) => st.completed)
                                     .length /
                                     task.subtasks.length) *
-                                    100
+                                    100,
                                 )}
                                 %
                               </span>
@@ -615,8 +617,8 @@ export default function Dashboard() {
                         </div>
                       )}
 
-                      <div className="mt-4 flex items-center justify-between">
-                        <div className="text-sm text-gray-500 flex flex-col gap-1">
+                      <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <div className="text-sm text-gray-500 flex flex-col gap-1 w-full sm:w-auto">
                           {task.dueDate ? (
                             <div className="flex items-center">
                               <svg
@@ -679,7 +681,7 @@ export default function Dashboard() {
                             </div>
                           )}
                         </div>
-                        <div className="flex space-x-2">
+                        <div className="flex flex-wrap gap-2">
                           {task.status !== "completed" && (
                             <button
                               onClick={() => completeTask(task._id)}
@@ -729,7 +731,7 @@ export default function Dashboard() {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 setActiveMenu(
-                                  activeMenu === task._id ? null : task._id
+                                  activeMenu === task._id ? null : task._id,
                                 );
                               }}
                               className="inline-flex items-center p-1.5 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

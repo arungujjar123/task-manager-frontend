@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import API from "../api/API";
 import { useNotification } from "../context/NotificationContext";
 

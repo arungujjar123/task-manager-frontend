@@ -81,7 +81,7 @@ const NotificationSettings = () => {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg p-6 mb-6">
+    <div className="bg-white shadow rounded-lg p-4 sm:p-6 mb-6">
       <h2 className="text-xl font-semibold mb-4">Notification Settings</h2>
 
       <div className="mb-6">
@@ -90,7 +90,7 @@ const NotificationSettings = () => {
           notifications to receive reminder alerts.
         </p>
 
-        <div className="flex items-center justify-between border rounded-md px-4 py-3 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border rounded-md px-4 py-3 mb-4">
           <div>
             <p className="text-sm font-medium text-gray-800">
               Browser Notifications
@@ -120,12 +120,12 @@ const NotificationSettings = () => {
 
         <button
           onClick={testBrowserNotification}
-          className="mb-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition-colors"
+          className="mb-4 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md transition-colors"
         >
           Test Browser Reminder
         </button>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <button
             onClick={testSuccessNotification}
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors"

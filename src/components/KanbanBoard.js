@@ -30,7 +30,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
           y: event.index * 10,
         };
       },
-    })
+    }),
   );
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
         "Active container:",
         activeContainer,
         "Over container:",
-        overContainer
+        overContainer,
       );
 
       if (activeContainer && overContainer) {
@@ -110,12 +110,12 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
           const destinationItems = [...columns[overContainer]];
 
           const sourceIndex = sourceItems.findIndex(
-            (item) => item._id === active.id
+            (item) => item._id === active.id,
           );
 
           // Check if we're dropping on a specific task or just into the column
           const destinationIndex = destinationItems.findIndex(
-            (item) => item._id === over.id
+            (item) => item._id === over.id,
           );
 
           if (sourceIndex !== -1) {
@@ -128,7 +128,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
               "from",
               activeContainer,
               "to",
-              overContainer
+              overContainer,
             );
 
             // Change status to match the target container
@@ -217,14 +217,16 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
     return (
       <div
         className={`p-4 rounded-lg shadow-md ${getPriorityClass(
-          task.priority
+          task.priority,
         )} ${task.isRecurring ? "border-l-4 border-purple-500" : ""}`}
       >
-        <div className="flex justify-between items-start">
-          <h3 className="text-lg font-semibold mb-2">{task.title}</h3>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <h3 className="text-lg font-semibold mb-2 break-words">
+            {task.title}
+          </h3>
           <span
             className={`px-2 py-1 rounded text-xs font-medium ${getCategoryClass(
-              task.category
+              task.category,
             )}`}
           >
             {task.category}
@@ -249,7 +251,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
                   {Math.round(
                     (task.subtasks.filter((st) => st.completed).length /
                       task.subtasks.length) *
-                      100
+                      100,
                   )}
                   %
                 </span>
@@ -274,10 +276,10 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
           </div>
         )}
 
-        <div className="flex justify-between items-center mt-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-2">
           <span
             className={`text-xs px-2 py-1 rounded ${getPriorityBadgeClass(
-              task.priority
+              task.priority,
             )}`}
           >
             {task.priority}
@@ -384,7 +386,7 @@ const KanbanBoard = ({ tasks, onStatusChange, onDelete, onEdit }) => {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex h-full gap-4 overflow-x-auto pb-4">
+        <div className="flex flex-col lg:flex-row gap-4 overflow-x-auto lg:overflow-x-visible pb-4">
           {Object.keys(columns).map((columnId) => (
             <TaskColumn
               key={columnId}
