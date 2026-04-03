@@ -25,7 +25,7 @@ export default function AddTask() {
     try {
       console.log("Submitting task with subtasks:", subtasks);
       // Token automatically attach hoga interceptor se
-      const response = await API.post("/tasks", {
+      await API.post("/tasks", {
         title,
         description,
         dueDate,
