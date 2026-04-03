@@ -104,7 +104,7 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
       const updatedSubtasks = localSubtasks.map((subtask) =>
         subtask._id === subtaskId
           ? { ...subtask, completed: !subtask.completed }
-          : subtask
+          : subtask,
       );
       setLocalSubtasks(updatedSubtasks);
 
@@ -123,7 +123,7 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
       style={style}
       {...attributes}
       className={`p-4 rounded-lg shadow-md relative ${getPriorityClass(
-        task.priority
+        task.priority,
       )} ${task.isRecurring ? "border-l-4 border-purple-500" : ""}`}
     >
       {/* Drag handle area */}
@@ -134,11 +134,13 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
       />
 
       <div className="relative z-10">
-        <div className="flex justify-between items-start">
-          <h3 className="text-lg font-semibold mb-2">{task.title}</h3>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+          <h3 className="text-lg font-semibold mb-2 break-words">
+            {task.title}
+          </h3>
           <span
             className={`px-2 py-1 rounded text-xs font-medium ${getCategoryClass(
-              task.category
+              task.category,
             )}`}
           >
             {task.category}
@@ -169,7 +171,7 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
                   {Math.round(
                     (localSubtasks.filter((st) => st.completed).length /
                       localSubtasks.length) *
-                      100
+                      100,
                   )}
                   %
                 </span>
@@ -199,7 +201,7 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
                 {localSubtasks.map((subtask) => (
                   <div
                     key={subtask._id}
-                    className="flex items-center text-xs"
+                    className="flex items-center gap-2 flex-wrap text-xs"
                     onClick={(e) => e.stopPropagation()} // Prevent card drag when clicking subtasks
                   >
                     <input
@@ -224,16 +226,16 @@ const SortableTaskCard = ({ id, task, onDelete, onEdit }) => {
           </div>
         )}
 
-        <div className="flex justify-between items-center mt-2">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-2">
           <span
             className={`text-xs px-2 py-1 rounded ${getPriorityBadgeClass(
-              task.priority
+              task.priority,
             )}`}
           >
             {task.priority}
           </span>
           <div
-            className="flex space-x-2 relative z-10"
+            className="flex flex-wrap gap-2 relative z-10"
             onMouseDown={(e) => e.stopPropagation()}
             onDragStart={(e) => e.preventDefault()}
             style={{ pointerEvents: "auto" }}

@@ -57,7 +57,7 @@ export default function EditTask() {
         setRecurringDay(
           task.recurringDay !== null && task.recurringDay !== undefined
             ? task.recurringDay.toString()
-            : "0"
+            : "0",
         );
 
         // Set subtasks if available
@@ -160,14 +160,14 @@ export default function EditTask() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-        <div className="px-6 py-8">
-          <div className="flex items-center justify-between mb-6">
+      <div className="max-w-xl w-full mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+        <div className="px-4 sm:px-6 py-6 sm:py-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-6">
             <h2 className="text-2xl font-bold text-gray-900">Edit Task</h2>
             <button
               type="button"
               onClick={() => navigate("/dashboard")}
-              className="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-900"
+              className="inline-flex w-full sm:w-auto justify-center items-center text-sm text-indigo-600 hover:text-indigo-900"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -345,7 +345,10 @@ export default function EditTask() {
 
               <div className="space-y-2 mb-4">
                 {subtasks.map((subtask, index) => (
-                  <div key={index} className="flex items-center">
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 flex-wrap"
+                  >
                     <input
                       type="checkbox"
                       checked={subtask.completed}
@@ -353,7 +356,7 @@ export default function EditTask() {
                       className="h-4 w-4 mr-2 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                     />
                     <span
-                      className={`flex-grow px-3 py-2 bg-gray-50 rounded-l-md border border-r-0 border-gray-300 ${
+                      className={`flex-grow min-w-0 px-3 py-2 bg-gray-50 rounded-l-md border border-r-0 border-gray-300 break-words ${
                         subtask.completed ? "line-through text-gray-500" : ""
                       }`}
                     >
@@ -381,13 +384,13 @@ export default function EditTask() {
                 ))}
               </div>
 
-              <div className="flex">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   placeholder="Add a subtask..."
                   value={newSubtask}
                   onChange={(e) => setNewSubtask(e.target.value)}
-                  className="flex-grow px-4 py-2 rounded-l-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="flex-grow px-4 py-2 rounded-md sm:rounded-l-lg sm:rounded-r-none border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
@@ -398,7 +401,7 @@ export default function EditTask() {
                 <button
                   type="button"
                   onClick={addSubtask}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-r-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white rounded-md sm:rounded-r-lg sm:rounded-l-none hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add
                 </button>
@@ -425,7 +428,7 @@ export default function EditTask() {
               </div>
 
               {isRecurring && (
-                <div className="ml-6 space-y-4 mt-2 p-3 bg-gray-50 rounded-md">
+                <div className="sm:ml-6 space-y-4 mt-2 p-3 bg-gray-50 rounded-md">
                   <div>
                     <label
                       htmlFor="recurringType"
@@ -483,17 +486,17 @@ export default function EditTask() {
               )}
             </div>
 
-            <div className="flex items-center justify-between pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-4">
               <button
                 type="button"
                 onClick={() => navigate("/dashboard")}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex w-full sm:w-auto justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="inline-flex items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="inline-flex w-full sm:w-auto justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -151,11 +151,11 @@ const CalendarSettings = () => {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       <h1 className="text-2xl font-bold mb-6">Google Calendar Integration</h1>
 
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <div className="flex items-center justify-between mb-4">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
           <div>
             <h2 className="text-lg font-semibold">
               Google Calendar Connection
@@ -171,7 +171,7 @@ const CalendarSettings = () => {
             <button
               onClick={handleDisconnectCalendar}
               disabled={loading}
-              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
             >
               Disconnect
             </button>
@@ -179,7 +179,7 @@ const CalendarSettings = () => {
             <button
               onClick={handleConnectCalendar}
               disabled={loading}
-              className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
             >
               Connect Google Calendar
             </button>
@@ -233,7 +233,7 @@ const CalendarSettings = () => {
 
               <button
                 onClick={handleSyncAllTasks}
-                className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                className="mt-2 w-full sm:w-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
               >
                 Sync All Tasks Now
               </button>

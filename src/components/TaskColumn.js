@@ -21,7 +21,7 @@ const TaskColumn = ({ id, title, tasks, onTaskDelete, onTaskEdit }) => {
   return (
     <div
       ref={setNodeRef}
-      className={`flex-shrink-0 w-80 ${columnColors[id]} rounded-lg shadow p-4 h-full flex flex-col`}
+      className={`flex-shrink-0 w-full lg:w-80 ${columnColors[id]} rounded-lg shadow p-4 h-auto lg:h-full flex flex-col`}
     >
       <h3 className="font-bold text-lg mb-4 text-center">{title}</h3>
       <div className="flex-grow overflow-y-auto">
