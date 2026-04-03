@@ -24,14 +24,14 @@ const CalendarSettings = () => {
         // Show appropriate messages if there are configuration issues
         if (!response.data.envConfigured) {
           warning(
-            "Google Calendar API credentials are not configured on the server. Please ask your administrator to set up the required credentials."
+            "Google Calendar API credentials are not configured on the server. Please ask your administrator to set up the required credentials.",
           );
         } else if (
           response.data.tokenStatus === "invalid" &&
           response.data.connected
         ) {
           warning(
-            "Your Google Calendar access has expired. Please reconnect your account."
+            "Your Google Calendar access has expired. Please reconnect your account.",
           );
         }
       } catch (error) {
@@ -113,7 +113,7 @@ const CalendarSettings = () => {
       setLoading(true);
       const response = await API.post("/calendar/sync/all");
       success(
-        `Successfully synced ${response.data.syncResults.length} tasks to Google Calendar`
+        `Successfully synced ${response.data.syncResults.length} tasks to Google Calendar`,
       );
     } catch (err) {
       console.error("Error syncing tasks to Google Calendar:", err);
@@ -153,18 +153,6 @@ const CalendarSettings = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold mb-6">Google Calendar Integration</h1>
-
-      {message && (
-        <div
-          className={`mb-4 p-4 rounded-lg ${
-            message.type === "error"
-              ? "bg-red-100 text-red-700"
-              : "bg-green-100 text-green-700"
-          }`}
-        >
-          {message.text}
-        </div>
-      )}
 
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
         <div className="flex items-center justify-between mb-4">

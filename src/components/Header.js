@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import API from "../api/API";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,6 +7,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   const isAuthenticated = !!localStorage.getItem("token");
+  const storedUser = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "null");
+    } catch {
+      return null;
+    }
+  })();
+  const displayName = storedUser?.name || storedUser?.email || "Account";
 
   // Check if Google Calendar is connected
   // useEffect(() => {
@@ -27,6 +34,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
@@ -56,6 +64,12 @@ const Header = () => {
                     className="border-transparent text-gray-700 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     Analytics
+                  </Link>
+                  <Link
+                    to="/settings"
+                    className="border-transparent text-gray-700 hover:text-indigo-600 hover:border-indigo-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  >
+                    Settings
                   </Link>
                   {/* <Link
                     to="/calendar-settings"
@@ -95,12 +109,18 @@ const Header = () => {
           {/* User profile and logout button */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             {isAuthenticated && (
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm text-white bg-gradient-to-r from-red-500 to-red-600 rounded-md shadow-sm hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-              >
-                Logout
-              </button>
+              <>
+                <div className="mr-4 text-sm text-gray-700">
+                  Signed in as{" "}
+                  <span className="font-medium">{displayName}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm text-white bg-gradient-to-r from-red-500 to-red-600 rounded-md shadow-sm hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                >
+                  Logout
+                </button>
+              </>
             )}
           </div>
 
@@ -178,6 +198,13 @@ const Header = () => {
                 >
                   Analytics
                 </Link>
+                <Link
+                  to="/settings"
+                  className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Settings
+                </Link>
                 {/* <Link
                   to="/calendar-settings"
                   className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
@@ -197,6 +224,9 @@ const Header = () => {
                 >
                   Logout
                 </button>
+                <div className="px-3 pb-2 text-xs text-gray-500">
+                  Signed in as {displayName}
+                </div>
               </>
             ) : (
               <>
