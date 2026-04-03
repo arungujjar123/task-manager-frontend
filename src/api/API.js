@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with default config
 const API = axios.create({
-  baseURL: "https://task-manager-backend-pjfs.vercel.app/api",
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -23,7 +23,7 @@ API.interceptors.request.use(
     // Handle request errors
     console.error("API request error:", error);
     return Promise.reject(error);
-  }
+  },
 );
 
 // Add response interceptor to handle common errors
@@ -47,7 +47,7 @@ API.interceptors.response.use(
         error.response.data.message.includes("OAuth")
       ) {
         console.error(
-          "OAuth authentication error. Please reconnect your Google account."
+          "OAuth authentication error. Please reconnect your Google account.",
         );
       }
     } else if (error.request) {
@@ -59,14 +59,14 @@ API.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 // Helper function to toggle subtask completion
 API.toggleSubtaskCompletion = async (taskId, subtaskId) => {
   try {
     const response = await API.patch(
-      `/tasks/${taskId}/subtasks/${subtaskId}/toggle`
+      `/tasks/${taskId}/subtasks/${subtaskId}/toggle`,
     );
     return response.data;
   } catch (error) {

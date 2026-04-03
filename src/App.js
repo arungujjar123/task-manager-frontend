@@ -6,9 +6,11 @@ import Register from "./pages/Register";
 import AddTask from "./pages/AddTask";
 import EditTask from "./pages/EditTask";
 import Analytics from "./pages/Analytics";
+import CalendarSettings from "./pages/CalendarSettings";
 import Header from "./components/Header";
 import { NotificationProvider } from "./context/NotificationContext";
 import NotificationContainer from "./components/NotificationContainer";
+import NotificationScheduler from "./components/NotificationScheduler";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Header />
         <NotificationContainer />
+        <NotificationScheduler />
 
         <main className="flex-grow">
           <Routes>
@@ -51,6 +54,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Analytics />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <CalendarSettings />
                 </ProtectedRoute>
               }
             />
